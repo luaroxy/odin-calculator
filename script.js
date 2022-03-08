@@ -29,3 +29,14 @@ const operate = function (operator, a, b){
       console.log(divide(a,b))
   }
 }
+
+const buttons = document.querySelectorAll('button');
+const display = document.querySelector('#display');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+    displayValue = button.textContent;
+    display.textContent = displayValue;
+    });
+  
+});
