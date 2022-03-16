@@ -1,0 +1,96 @@
+body{
+    margin:0;
+    background-color: #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Container{
+    border: 2px solid black;
+    width: 350px;
+    height: 450px;
+    margin: 30px;
+    border-radius: 25px;
+    background: url("https://t3.ftcdn.net/jpg/03/97/42/82/360_F_397428228_BDdUrJoIk9SwOHJiaTMiuYrscxOWbI0d.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; 
+}
+
+.displays{
+    border: 2px solid black;
+    width: 300px;
+    height: 70px;
+    margin: 22.5px;
+    background-color: rgba(49, 151, 126, 0.3);
+}
+
+.topButtonContainer{
+    display:flex;
+    justify-content: space-between;
+    margin: 22.5px 22.5px 15px;
+}
+/*
+.numbersButtonContainer{
+    display:flex;
+    justify-content: space-between;
+     margin: 22.5px 100px 22.5px 22.5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.operatorsButtonContainer{
+    display:flex;
+    justify-content: space-between;
+    flex-direction: column;
+      margin: 100px 22.5px 22.5px 22.5px;
+}
+
+.numbers,#equal,{
+    border: 1px solid #eee;
+  box-shadow: 2px 4px 16px rgba(0,0,0,.06);
+    border-radius: 15px;
+    width: 30px;
+  padding: 15px;
+  margin: 16px;
+}
+*/
+.buttonsContainer{
+    display: flex;
+    margin: 10px 22.5px 10px;
+    height: 250px;
+    gap: 10px;
+}
+
+.numbersButtonContainer{
+display: flex;
+width: 228.75px;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 5px;
+}
+
+.operatorsButtonContainer {
+display: flex;
+flex-direction: column;
+width: 76.25px;
+justify-content: space-between;
+align-items: flex-end;
+gap: 5px;
+}
+
+.numbers, #equal, .operators{
+    width: 66.25px;
+    border-radius: 15px;
+}
+
+.operators{
+    flex: 1 1 0%;
+}
+
+#clear, #delete{
+    width: 135.5px;
+    border-radius: 15px;
+    height: 40px;
+}
