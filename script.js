@@ -5,6 +5,7 @@ numbersToOperate=[];
 
 const startCalculator = function (){
   displayValue = this.textContent;
+  console.log(this.textContent)
   checkDisplayType=this.className;
   if (checkDisplayType == "numbers") {
     display.textContent += displayValue;
@@ -19,15 +20,20 @@ const startCalculator = function (){
     numbersToOperate.pop();
   }
 
+  if (this.textContent == "."){
+    document.getElementById("dot").disabled = true;
+  }
+  
   if (numbersToOperate.includes("=")){
     calculationResult = calculate();
     if (calculationResult != "NaN"){
-    display.textContent=calculationResult;
-    displayAll.textContent = calculationResult;
+      display.textContent=calculationResult;
+      displayAll.textContent = calculationResult;
+      document.getElementById("dot").disabled = false;
     }
   }
-  
-  if (this.textContent == "clear"){
+  console.log(this.textContent)
+  if (this.textContent === "clear"){
     clear();
   }
 }
@@ -73,26 +79,25 @@ const calculate = function(){
   if(numbersToOperate.includes("+")){
     operator = "+";
     tempInd = numbersToOperate.indexOf("+");
-  }
-
-  if(numbersToOperate.includes("-")){
+  } else if(numbersToOperate.includes("-")){
     operator = "-";
     tempInd = numbersToOperate.indexOf("-");
-  }
-
-  if(numbersToOperate.includes("*")){
+  } else if(numbersToOperate.includes("*")){
     operator = "*";
     tempInd = numbersToOperate.indexOf("*");
-  }
-
-  if(numbersToOperate.includes("/")){
+  } else if(numbersToOperate.includes("/")){
     operator = "/";
     tempInd = numbersToOperate.indexOf("/");
+  } else {
+    disableButtons();
+    return;
   }
 
   a = parseFloat(numbersToOperate.slice(0,tempInd).join(""));
   b = parseFloat(numbersToOperate.slice(tempInd+1, numbersToOperate.length-1).join(""));
-
+  if (isNaN(b)){
+    b=a;
+  }
   numbersToOperate = [];
   resultOfOperate = operate(operator,a,b);
   
@@ -105,6 +110,8 @@ const clear = function(){
   display.textContent = "";
   displayAll.textContent = "";
   numbersToOperate = [];
+  a=0;
+  b=0;
   enableButtons();
 }
 
@@ -142,6 +149,38 @@ function enableButtons(){
   document.getElementById("delete").disabled = false;
 }
 
+const keyboard = function(e) {
+  e.preventDefault();
+  if (e.keyCode == 48 || e.keyCode == 96) document.getElementById("n0").click();
+  if (e.keyCode == 49 || e.keyCode == 97) document.getElementById("n1").click();
+  if (e.keyCode == 50 || e.keyCode == 98) document.getElementById("n2").click();
+  if (e.keyCode == 51 || e.keyCode == 99) document.getElementById("n3").click();
+  if (e.keyCode == 52 || e.keyCode == 100) document.getElementById("n4").click();
+  if (e.keyCode == 53 || e.keyCode == 101) document.getElementById("n5").click();
+  if (e.keyCode == 54 || e.keyCode == 102) document.getElementById("n6").click();
+  if (e.keyCode == 55 || e.keyCode == 103) document.getElementById("n7").click();
+  if ((e.keyCode == 56 && e.shiftKey == false) || e.keyCode == 104) document.getElementById("n8").click();
+  if (e.keyCode == 57 || e.keyCode == 105) document.getElementById("n9").click();
+  if (e.keyCode == 110 || e.keyCode == 190) document.getElementById("dot").click();
+  if (e.keyCode == 13 || (e.keyCode == 187 && e.shiftKey == false)) document.getElementById("equal").click();
+  if (e.keyCode == 107 || (e.keyCode == 187 && e.shiftKey == true)) document.getElementById("o+").click();
+  if (e.keyCode == 109 || e.keyCode == 189) document.getElementById("o-").click();
+  if (e.keyCode == 106 || (e.keyCode == 56 && e.shiftKey == true)) document.getElementById("o*").click();
+  if (e.keyCode == 111 || e.keyCode == 191) document.getElementById("o/").click();
+  if (e.keyCode == 8 || e.keyCode == 46) document.getElementById("delete").click();
+}
+
 buttons.forEach((button) => {
    button.addEventListener('click', startCalculator);
 });
+
+document.addEventListener("keyup", keyboard);
+
+
+
+ // if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+  //  event.preventDefault();
+    // Trigger the button element with a click
+  //  document.getElementById("myBtn").click();
+ // }
